@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muhammed Emin Arslan — Full Stack Developer</title>
-  <meta name="description" content="İstanbul merkezli Full Stack Developer. Web, mobil ve masaüstü için Flutter, React, Python ve modern web teknolojileriyle ürün geliştiriyorum.">
+  <meta name="description" content="İstanbul merkezli yazılım mühendisi. Flutter, React ve Python ile web, mobil ve masaüstü ürünler geliştiriyorum. Freelance ve iş birliğine açığım.">
   <meta name="author" content="Muhammed Emin Arslan">
   <link rel="canonical" href="https://muhammedeminarslanfinalprojesi.netlify.app/">
 
@@ -13,82 +13,119 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://muhammedeminarslanfinalprojesi.netlify.app/">
   <meta property="og:image" content="https://muhammedeminarslanfinalprojesi.netlify.app/fotoo2.jpg">
-  <meta name="theme-color" content="#0E1214">
+  <meta name="theme-color" content="#07090B">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <canvas id="cursor-trail" aria-hidden="true"></canvas>
+
+  <div class="boot" id="boot" aria-hidden="true">
+    <pre class="boot-mark">{ MEA }</pre>
+    <p class="boot-sub">session start</p>
+  </div>
 
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menüyü aç">
-    <em>Menü</em>
+    <em>menü</em>
   </button>
 
   <header class="site-header" id="site-header">
     <div class="header-inner">
       <a class="logo" href="#anasayfa" aria-label="Ana sayfa">
         <span class="logo-mark">MEA</span>
-        <span class="logo-name">Muhammed Emin Arslan</span>
+        <span class="logo-path">~/memin_job</span>
       </a>
 
       <nav class="site-nav" id="site-nav" aria-label="Ana menü">
-        <a href="#hakkimda">Hakkımda</a>
-        <a href="#deneyim">Deneyim</a>
-        <a href="#projeler">Projeler</a>
-        <a href="#yetkinlikler">Yetkinlikler</a>
-        <a href="#iletisim">İletişim</a>
-        <a class="nav-cv" href="ozgecmis.html">Özgeçmiş</a>
+        <a href="#hakkimda">/hakkimda</a>
+        <a href="#deneyim">/deneyim</a>
+        <a href="#projeler">/projeler</a>
+        <a href="#yetkinlikler">/stack</a>
+        <a href="#iletisim">/iletisim</a>
+        <a class="nav-cv" href="ozgecmis.html">özgeçmiş</a>
       </nav>
+
+      <span class="header-status"><i></i> available</span>
     </div>
   </header>
 
   <main id="icerik">
     <section class="hero" id="anasayfa">
       <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Full Stack Developer · Web · Mobil · Masaüstü</p>
-          <h1>
-            Ben <span class="accent">Muhammed Emin Arslan.</span>
-            <span class="type-row">
-              <span class="sr-only">Full Stack Developer’ım. Web, mobil ve masaüstü uygulamalar geliştiriyorum.</span>
-              <span class="type-sizer" aria-hidden="true">Mobil ve masaüstü ürünler üretiyorum.</span>
-              <span id="changing-text" aria-hidden="true"></span>
-            </span>
-          </h1>
-          <p class="lede">
-            İstanbul Topkapı Üniversitesi Yazılım Mühendisliği mezunuyum.
-            Web siteleri, mobil uygulamalar ve masaüstü yazılımlar üretiyorum.
-            Flutter, React ve Python ile uçtan uca ürün teslim ediyorum.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projeler">Seçili işler</a>
-            <a class="btn btn-ghost" href="#iletisim">İletişime geç</a>
+        <div class="terminal" data-reveal>
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"></span>
+            <span class="window-title">mea@istanbul — zsh</span>
+            <span class="window-flag">available</span>
+          </div>
+          <div class="terminal-body" id="terminal">
+            <p class="term-line"><span class="prompt">$</span> whoami</p>
+            <p class="term-out">Muhammed Emin Arslan<br>Full Stack Developer · İstanbul</p>
+            <p class="term-line"><span class="prompt">$</span> stack</p>
+            <p class="term-out">Flutter · React · Python · Dart · Flask</p>
+            <p class="term-line"><span class="prompt">$</span> available</p>
+            <p class="term-out"><span class="ok">true</span> — freelance &amp; iş birliği</p>
           </div>
         </div>
 
-        <figure class="hero-photo">
+        <figure class="hero-file" data-reveal>
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"></span>
+            <span class="window-title">assets/fotoo2.jpg</span>
+            <span class="window-flag">1240×1550</span>
+          </div>
           <img src="fotoo2.jpg" alt="Muhammed Emin Arslan, İstanbul sahilinde">
           <figcaption>İstanbul, Avrupa yakası · Yazılım Mühendisliği, 2021–2025</figcaption>
         </figure>
 
+        <div class="hero-copy" data-reveal>
+          <p class="lede">
+            İstanbul Topkapı Üniversitesi Yazılım Mühendisliği mezunuyum.
+            Web, mobil ve masaüstü için uçtan uca ürün teslim ediyorum.
+            Kısa bir not yeter — birlikte bakalım.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projeler">seçili işler</a>
+            <a class="btn btn-ghost" href="#iletisim">iletişime geç</a>
+          </div>
+        </div>
+
         <ul class="hero-stats" aria-label="Özet">
-          <li><strong>20+</strong><span>Tamamlanan proje</span></li>
-          <li><strong>3.1</strong><span>Onur derecesi GPA</span></li>
-          <li><strong>3</strong><span>Web, mobil, masaüstü</span></li>
+          <li data-reveal>
+            <strong data-count="20" data-suffix="+">0</strong>
+            <span>tamamlanan proje</span>
+          </li>
+          <li data-reveal>
+            <strong data-count="3.1" data-decimals="1">0</strong>
+            <span>onur derecesi GPA</span>
+          </li>
+          <li data-reveal>
+            <strong data-count="320" data-suffix="s">0</strong>
+            <span>Flutter / Dart eğitimi</span>
+          </li>
         </ul>
       </div>
     </section>
 
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Dart</span><span>React</span><span>Flask</span><span>SQLite</span><span>Flutter</span><span>Python</span><span>PHP</span><span>Firebase</span><span>JavaScript</span><span>Git</span>
+        <span>Dart</span><span>React</span><span>Flask</span><span>SQLite</span><span>Flutter</span><span>Python</span><span>PHP</span><span>Firebase</span><span>JavaScript</span><span>Git</span>
+      </div>
+    </div>
+
     <section class="about" id="hakkimda">
       <div class="wrap about-grid">
-        <div class="section-kicker">
-          <p class="eyebrow">Hakkımda</p>
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// hakkımda</p>
           <h2>Web’den masaya, her ekranda çalışan yazılım.</h2>
         </div>
-        <div class="about-body">
+        <div class="about-body" data-reveal>
           <p>
             Full Stack Developer olarak web, mobil ve masaüstü platformlarda
             kullanıcı dostu ürünler geliştiriyorum. Flutter ve Dart ile tek kod
@@ -104,19 +141,19 @@
           </p>
           <dl class="facts">
             <div>
-              <dt>Eğitim</dt>
+              <dt>eğitim</dt>
               <dd>İstanbul Topkapı Üniversitesi, Yazılım Mühendisliği (2021–2025) · 3.1 / 4, onur derecesi</dd>
             </div>
             <div>
-              <dt>Odak</dt>
+              <dt>odak</dt>
               <dd>Web, mobil ve masaüstü · Flutter, Dart, React, Python, PHP</dd>
             </div>
             <div>
-              <dt>Dil</dt>
+              <dt>dil</dt>
               <dd>İngilizce, B1</dd>
             </div>
             <div>
-              <dt>Konum</dt>
+              <dt>konum</dt>
               <dd>İstanbul, Avrupa yakası</dd>
             </div>
           </dl>
@@ -126,13 +163,13 @@
 
     <section class="experience" id="deneyim">
       <div class="wrap">
-        <div class="section-kicker">
-          <p class="eyebrow">Deneyim</p>
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// deneyim</p>
           <h2>Staj, eğitim ve saha deneyimi.</h2>
         </div>
 
         <ol class="timeline">
-          <li>
+          <li data-reveal>
             <p class="when">Ocak 2025 — Temmuz 2025</p>
             <h3>Full Stack Developer Intern</h3>
             <p class="where">XDATUM Yazılım Bilişim · İstanbul</p>
@@ -144,7 +181,7 @@
               çalışmalarında da yer aldım.
             </p>
           </li>
-          <li>
+          <li data-reveal>
             <p class="when">Mayıs 2025 — Temmuz 2025</p>
             <h3>Mobil Developer Eğitimi</h3>
             <p class="where">SoftITo · İstanbul Ticaret Odası</p>
@@ -154,19 +191,19 @@
               ve üretim odaklı arayüz pratikleri üzerine yoğunlaştım.
             </p>
           </li>
-          <li>
+          <li data-reveal>
             <p class="when">2023 — 2024</p>
             <h3>Gönüllü Stajyer</h3>
             <p class="where">Özer Bilişim · İstanbul</p>
             <p>İki aylık gönüllü staj sürecini tamamladım; yazılım süreçlerini yakından takip ederek teslimlere katkı verdim.</p>
           </li>
-          <li>
+          <li data-reveal>
             <p class="when">2022 — 2023</p>
             <h3>Başkan Yardımcısı</h3>
             <p class="where">Üniversite Bilişim Topluluğu Kulübü</p>
             <p>Etkinlik organizasyonu ve koordinasyonunda görev aldım; takım çalışması, liderlik ve planlama becerilerimi geliştirdim.</p>
           </li>
-          <li>
+          <li data-reveal>
             <p class="when">2021 — 2023</p>
             <h3>Matematik Öğretmeni</h3>
             <p class="where">Buddy Akademi · İstanbul</p>
@@ -181,14 +218,14 @@
 
     <section class="work" id="projeler">
       <div class="wrap">
-        <div class="section-kicker">
-          <p class="eyebrow">Seçili işler</p>
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// seçili işler</p>
           <h2>Üzerinde çalıştığım ürünler.</h2>
         </div>
 
         <div class="project-grid">
-          <article class="project featured">
-            <p class="tag">Devam ediyor · Mobil &amp; masaüstü</p>
+          <article class="project featured" data-reveal data-path="lib/features/learn/home.dart" data-log="feat: desktop target + sqlite persistence">
+            <p class="tag">devam ediyor · mobil &amp; masaüstü</p>
             <h3>SQ Akademi</h3>
             <p>Flutter ve SQLite ile geliştirdiğim öğrenme uygulaması. Mobil ve masaüstü hedefli; yakında pazara sunmayı planlıyorum.</p>
             <ul class="stack">
@@ -198,8 +235,8 @@
             </ul>
           </article>
 
-          <article class="project">
-            <p class="tag">Mobil</p>
+          <article class="project" data-reveal data-path="lib/screens/cart_screen.dart" data-log="feat: favori ve sepet akışı">
+            <p class="tag">mobil</p>
             <h3>Trendyol Klonu</h3>
             <p>Favoriye ekleme, sepete ekleme ve çıkarma gibi temel e-ticaret akışlarını Flutter widget’larıyla birebir arayüz yaklaşımıyla uyguladım.</p>
             <ul class="stack">
@@ -209,8 +246,8 @@
             <a class="text-link" href="https://github.com/memin25/Trendyol_clone" target="_blank" rel="noopener noreferrer">GitHub’da incele</a>
           </article>
 
-          <article class="project">
-            <p class="tag">React Native</p>
+          <article class="project" data-reveal data-path="src/screens/Events.jsx" data-log="feat: etkinlik oluşturma ve listeleme">
+            <p class="tag">react native</p>
             <h3>Eventify</h3>
             <p>Etkinlik oluşturma, listeleme ve detay. Kullanıcılar katıldıkları ve yayınladıkları etkinlikleri takip edebiliyor. React Native ve Expo öğrenmek için geliştirdim.</p>
             <ul class="stack">
@@ -220,8 +257,8 @@
             <a class="text-link" href="https://github.com/memin25/Eventify_mobile_app" target="_blank" rel="noopener noreferrer">GitHub’da incele</a>
           </article>
 
-          <article class="project">
-            <p class="tag">Staj · Web</p>
+          <article class="project" data-reveal data-path="src/pages/Analytics.jsx" data-log="feat: satış ve çalışan raporları">
+            <p class="tag">staj · web</p>
             <h3>XReport</h3>
             <p>XDATUM’da geliştirilen analitik paneli. Şirketlere çalışan ve satış verileri üzerinden raporlama sunuyor.</p>
             <ul class="stack">
@@ -231,8 +268,8 @@
             </ul>
           </article>
 
-          <article class="project">
-            <p class="tag">Web</p>
+          <article class="project" data-reveal data-path="admin/products.php" data-log="feat: admin crud + mysql">
+            <p class="tag">web</p>
             <h3>PHP E-ticaret</h3>
             <p>Admin panelinden ürün ekleme, silme ve güncelleme yapılan e-ticaret sitesi. HTML, CSS, JavaScript, PHP ve MySQL ile tüm temel akışlar çalışır durumda.</p>
             <ul class="stack">
@@ -242,8 +279,8 @@
             </ul>
           </article>
 
-          <article class="project">
-            <p class="tag">Tasarım → kod</p>
+          <article class="project" data-reveal data-path="lib/ui/figma_screen.dart" data-log="chore: figma to widget">
+            <p class="tag">tasarım → kod</p>
             <h3>Figma’dan uygulamaya</h3>
             <p>Figma tasarımlarını inceleyerek Flutter uygulamalarına dönüştürdüm. Widget yapısı ve responsive tasarım üzerine yoğun pratik yaptım.</p>
             <ul class="stack">
@@ -252,8 +289,8 @@
             </ul>
           </article>
 
-          <article class="project">
-            <p class="tag">Bitirme · Python</p>
+          <article class="project" data-reveal data-path="src/alert_system.py" data-log="feat: threat detect + alarm">
+            <p class="tag">bitirme · python</p>
             <h3>Görüntü İşleme Uyarı Sistemi</h3>
             <p>Doç. Dr. Cevat Rahebi danışmanlığında tehdit algılama ve alarm üretmeye odaklanan bitirme çalışması. Görüntü işleme üzerine ilerliyor.</p>
             <ul class="stack">
@@ -262,8 +299,8 @@
             </ul>
           </article>
 
-          <article class="project">
-            <p class="tag">Web</p>
+          <article class="project" data-reveal data-path="src/app/index.html" data-log="feat: terminal hero + live github">
+            <p class="tag">web</p>
             <h3>Kişisel portföy</h3>
             <p>Projelerimi ve yetkinliklerimi sergilemek için HTML, CSS ve JavaScript ile geliştirdiğim bu site. Mobil ve masaüstü ekranlarda çalışacak şekilde tasarlandı.</p>
             <ul class="stack">
@@ -271,7 +308,6 @@
               <li>CSS</li>
               <li>JavaScript</li>
             </ul>
-            <a class="text-link" href="https://github.com/memin25/my_web_site_end" target="_blank" rel="noopener noreferrer">GitHub’da incele</a>
           </article>
         </div>
       </div>
@@ -279,57 +315,93 @@
 
     <section class="skills" id="yetkinlikler">
       <div class="wrap">
-        <div class="section-kicker">
-          <p class="eyebrow">Yetkinlikler</p>
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// yetkinlikler</p>
           <h2>Günlük işimde kullandığım araçlar.</h2>
         </div>
 
-        <div class="skill-groups">
-          <div>
-            <h3>Mobil &amp; masaüstü</h3>
-            <ul>
-              <li>Flutter</li>
-              <li>Dart</li>
-              <li>React Native</li>
-              <li>Provider / Bloc</li>
-              <li>Windows / macOS</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Web</h3>
-            <ul>
-              <li>HTML / CSS</li>
-              <li>JavaScript</li>
-              <li>React</li>
-              <li>Figma</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Arka yüz</h3>
-            <ul>
-              <li>Python</li>
-              <li>Flask</li>
-              <li>PHP</li>
-              <li>REST API</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Veri &amp; araçlar</h3>
-            <ul>
-              <li>SQLite</li>
-              <li>Firebase</li>
-              <li>MySQL</li>
-              <li>Git / GitHub</li>
-            </ul>
+        <div class="token-board" data-reveal>
+          <p class="token-hint">üzerine gel — gerçek kullanım</p>
+          <div class="tokens">
+            <button type="button" class="token" data-hint="Provider / Bloc">Flutter</button>
+            <button type="button" class="token" data-hint="null-safety, tek kod tabanı">Dart</button>
+            <button type="button" class="token" data-hint="Expo ile etkinlik uygulaması">React Native</button>
+            <button type="button" class="token" data-hint="XReport analitik paneli">React</button>
+            <button type="button" class="token" data-hint="Flask API">Python</button>
+            <button type="button" class="token" data-hint="REST + raporlama">Flask</button>
+            <button type="button" class="token" data-hint="e-ticaret CRUD">PHP</button>
+            <button type="button" class="token" data-hint="yerel kalıcılık">SQLite</button>
+            <button type="button" class="token" data-hint="auth &amp; realtime">Firebase</button>
+            <button type="button" class="token" data-hint="ilişkisel veri">MySQL</button>
+            <button type="button" class="token" data-hint="DOM, form, arayüz">JavaScript</button>
+            <button type="button" class="token" data-hint="duyarlı arayüz">HTML / CSS</button>
+            <button type="button" class="token" data-hint="tasarımdan widget’a">Figma</button>
+            <button type="button" class="token" data-hint="GitHub iş akışı">Git</button>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="console" id="konsol">
+      <div class="wrap console-grid">
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// snippet</p>
+          <h2>Nasıl düşündüğümü bir bakışta görün.</h2>
+          <p class="lede">Kopyalayın, inceleyin, yazın. Bu site bir kartvizit değil — çalışan bir ortam.</p>
+        </div>
+
+        <div class="snippet" data-reveal>
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"></span>
+            <span class="window-title">src/profile.js</span>
+            <button type="button" class="copy-btn" id="copy-snippet" aria-label="Kod parçasını kopyala">kopyala</button>
+          </div>
+          <pre><code id="snippet-code">const engineer = {
+  name: "Muhammed Emin Arslan",
+  role: "Full Stack Developer",
+  stack: ["Flutter", "React", "Python"],
+  available: true,
+  ping: "muhammedea25@gmail.com",
+};
+
+export default engineer;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="github" id="github">
+      <div class="wrap">
+        <div class="section-kicker" data-reveal>
+          <p class="eyebrow">// github</p>
+          <h2>Canlı aktivite, statik kart değil.</h2>
+        </div>
+
+        <div class="gh-grid" data-reveal>
+          <article class="gh-card">
+            <p class="gh-kicker">memin25</p>
+            <h3>Dil dağılımı</h3>
+            <div id="gh-langs" class="gh-langs">
+              <p class="gh-fallback">GitHub verisi yükleniyor…</p>
+            </div>
+          </article>
+          <article class="gh-card">
+            <p class="gh-kicker">public events</p>
+            <h3>Son commit’ler</h3>
+            <ul id="gh-events" class="gh-events">
+              <li class="gh-fallback">Son aktiviteler alınıyor…</li>
+            </ul>
+          </article>
+        </div>
+        <p class="gh-more">
+          <a class="text-link" href="https://github.com/memin25" target="_blank" rel="noopener noreferrer">github.com/memin25</a>
+        </p>
+      </div>
+    </section>
+
     <section class="contact" id="iletisim">
       <div class="wrap contact-grid">
-        <div>
-          <p class="eyebrow">İletişim</p>
+        <div data-reveal>
+          <p class="eyebrow">// iletişim</p>
           <h2>Bir proje veya iş birliği için yazın.</h2>
           <p class="lede">
             Web, mobil ve masaüstü işler için yeni fırsatlara açığım.
@@ -337,25 +409,25 @@
           </p>
           <ul class="contact-list">
             <li>
-              <span>E-posta</span>
+              <span>e-posta</span>
               <a href="mailto:muhammedea25@gmail.com">muhammedea25@gmail.com</a>
             </li>
             <li>
-              <span>Telefon</span>
+              <span>telefon</span>
               <a href="tel:+905352102425">+90 535 210 24 25</a>
             </li>
             <li>
-              <span>LinkedIn</span>
+              <span>linkedin</span>
               <a href="https://www.linkedin.com/in/muhammed-emin-arslan-79b381238/" target="_blank" rel="noopener noreferrer">muhammed-emin-arslan</a>
             </li>
             <li>
-              <span>GitHub</span>
+              <span>github</span>
               <a href="https://github.com/memin25" target="_blank" rel="noopener noreferrer">github.com/memin25</a>
             </li>
           </ul>
         </div>
 
-        <form class="contact-form" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/tesekkur.html">
+        <form class="contact-form" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/tesekkur.html" data-reveal>
           <input type="hidden" name="form-name" value="iletisim">
           <p class="honeypot">
             <label>Boş bırakın <input name="bot-field"></label>
@@ -376,7 +448,7 @@
             Mesaj
             <textarea name="message" rows="5" required></textarea>
           </label>
-          <button class="btn btn-primary" type="submit">Gönder</button>
+          <button class="btn btn-primary" type="submit">gönder</button>
           <p class="form-note" hidden>Mesajınız gönderildi. Teşekkürler.</p>
         </form>
       </div>
@@ -389,12 +461,12 @@
         <div class="footer-brand">
           <a class="logo" href="#anasayfa">
             <span class="logo-mark">MEA</span>
-            <span class="logo-name">Muhammed Emin Arslan</span>
+            <span class="logo-path">~/memin_job</span>
           </a>
           <p>İstanbul merkezli Full Stack Developer. Web, mobil ve masaüstü için ürün geliştiriyorum.</p>
         </div>
         <div>
-          <h3>Sayfalar</h3>
+          <h3>sayfalar</h3>
           <ul>
             <li><a href="#hakkimda">Hakkımda</a></li>
             <li><a href="#deneyim">Deneyim</a></li>
@@ -404,7 +476,7 @@
           </ul>
         </div>
         <div>
-          <h3>İletişim</h3>
+          <h3>iletişim</h3>
           <ul>
             <li><a href="mailto:muhammedea25@gmail.com">muhammedea25@gmail.com</a></li>
             <li><a href="tel:+905352102425">+90 535 210 24 25</a></li>
@@ -421,6 +493,22 @@
     </div>
   </footer>
 
-  <script src="script.js?v=4"></script>
+  <div class="statusbar">
+    <button type="button" class="kbd-hint" id="kbd-hint" aria-label="Proje listesini aç">
+      <kbd id="kbd-mod">⌘</kbd><kbd>K</kbd>
+      <span>projeler</span>
+    </button>
+    <span class="statusbar-meta">main · UTF-8 · available</span>
+  </div>
+
+  <div class="palette" id="palette" hidden>
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-labelledby="palette-title">
+      <p id="palette-title" class="sr-only">Komut paleti</p>
+      <input type="search" id="palette-input" placeholder="projeler, iletişim, stack…" autocomplete="off" aria-label="Komut ara">
+      <ul id="palette-list"></ul>
+    </div>
+  </div>
+
+  <script src="script.js?v=6"></script>
 </body>
 </html>

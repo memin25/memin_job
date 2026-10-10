@@ -1,10 +1,8 @@
-# Muhammed Emin Arslan — Full Stack Developer
+# Muhammed Emin Arslan — memin_job
 
-Web, mobil ve masaüstü uygulamaları geliştiren kişisel portföy sitesi. Statik HTML, CSS ve JavaScript ile hazırlanmıştır.
+Freelance ve iş birliği için kişisel portföy. Statik HTML, CSS ve JavaScript.
 
-Canlı: [muhammedeminarslanfinalprojesi.netlify.app](https://muhammedeminarslanfinalprojesi.netlify.app/)
-
-Özgeçmiş: `Yazılım_Mühendisi_Muhammed_Emin_Arslan_cv.pdf`
+Eski site (`my_web_site_end`) ayrı durur. Bu repo yeni kimlik: terminal hero, canlı GitHub verisi, komut paleti.
 
 ## Yerelde çalıştırma
 
@@ -12,10 +10,10 @@ Canlı: [muhammedeminarslanfinalprojesi.netlify.app](https://muhammedeminarslanf
 npx serve .
 ```
 
-veya herhangi bir statik sunucu ile kök dizini açın.
-
 ## İçerik
 
-- Hakkımda, deneyim, seçili projeler, yetkinlikler ve iletişim
-- Netlify Forms ile iletişim formu
-- Güncel özgeçmiş indirme bağlantısı
+- Terminal `whoami` / `stack` / `available`
+- Seçili projeler, deneyim, yetkinlik token’ları
+- GitHub dil dağılımı ve son public event’ler
+- Netlify Forms ile iletişim
+- Özgeçmiş önizleme ve indirme
