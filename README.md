@@ -13,7 +13,7 @@ npx serve .
 ## İçerik
 
 - Terminal `whoami` / `stack` / `available`
-- Seçili projeler, deneyim, yetkinlik token’ları
+- Hizmetler, seçili projeler, teslimler, yetkinlik token’ları
 - GitHub dil dağılımı ve son public event’ler
 - Netlify Forms ile iletişim
-- Özgeçmiş önizleme ve indirme
+- Teslim edilen işler kaydı

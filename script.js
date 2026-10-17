@@ -1,5 +1,3 @@
-const GITHUB_USER = "memin25";
-
 const terminalScript = [
   { kind: "cmd", text: "whoami" },
   { kind: "out", html: "Muhammed Emin Arslan<br>Full Stack Developer · İstanbul" },
@@ -10,17 +8,15 @@ const terminalScript = [
 ];
 
 const paletteItems = [
-  { title: "Projeler", hint: "seçili işler", href: "#projeler" },
+  { title: "Teslimler", hint: "teslim edilen işler", href: "#teslimler" },
   { title: "Hakkımda", hint: "/hakkimda", href: "#hakkimda" },
-  { title: "Deneyim", hint: "/deneyim", href: "#deneyim" },
+  { title: "Hizmetler", hint: "ne yaptırmak istiyorsunuz", href: "#hizmetler" },
   { title: "Yetkinlikler", hint: "/stack", href: "#yetkinlikler" },
   { title: "İletişim", hint: "form + kanallar", href: "#iletisim" },
-  { title: "GitHub aktivite", hint: "canlı veri", href: "#github" },
-  { title: "Özgeçmiş", hint: "PDF", href: "ozgecmis.html" },
-  { title: "SQ Akademi", hint: "lib/features/learn/home.dart", href: "#projeler" },
+  { title: "Okuma Atölyesi", hint: "okumaatolyesi.com", href: "https://okumaatolyesi.com" },
+  { title: "Digiturk Online", hint: "digiturk-online.com", href: "https://digiturk-online.com" },
   { title: "Trendyol Klonu", hint: "GitHub", href: "https://github.com/memin25/Trendyol_clone" },
   { title: "Eventify", hint: "GitHub", href: "https://github.com/memin25/Eventify_mobile_app" },
-  { title: "XReport", hint: "staj · web", href: "#projeler" },
 ];
 
 const prefersReduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -219,88 +215,6 @@ function setupCopy() {
   });
 }
 
-function relativeTime(date) {
-  const diff = Date.now() - date.getTime();
-  const minutes = Math.round(diff / 60000);
-  if (minutes < 60) return `${Math.max(minutes, 1)} dk önce`;
-  const hours = Math.round(minutes / 60);
-  if (hours < 24) return `${hours} sa önce`;
-  const days = Math.round(hours / 24);
-  if (days < 30) return `${days} gün önce`;
-  return date.toLocaleDateString("tr-TR");
-}
-
-async function loadGitHub() {
-  const langsRoot = document.getElementById("gh-langs");
-  const eventsRoot = document.getElementById("gh-events");
-  if (!langsRoot || !eventsRoot) return;
-
-  try {
-    const [reposRes, eventsRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`),
-      fetch(`https://api.github.com/users/${GITHUB_USER}/events/public?per_page=12`),
-    ]);
-
-    if (!reposRes.ok || !eventsRes.ok) throw new Error("GitHub yanıt vermedi");
-
-    const repos = await reposRes.json();
-    const events = await eventsRes.json();
-
-    const totals = {};
-    repos.forEach((repo) => {
-      if (!repo.language || repo.fork) return;
-      totals[repo.language] = (totals[repo.language] || 0) + 1;
-    });
-
-    const ranked = Object.entries(totals)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
-    const sum = ranked.reduce((acc, [, count]) => acc + count, 0) || 1;
-
-    if (!ranked.length) {
-      langsRoot.innerHTML = '<p class="gh-fallback">Henüz dil verisi yok.</p>';
-    } else {
-      langsRoot.innerHTML = ranked
-        .map(([lang, count]) => {
-          const pct = Math.round((count / sum) * 100);
-          return `<div class="gh-lang"><span>${lang}<b>${pct}%</b></span><div class="gh-bar"><i style="--w:${pct}%"></i></div></div>`;
-        })
-        .join("");
-      requestAnimationFrame(() => {
-        langsRoot.querySelectorAll(".gh-bar i").forEach((bar) => {
-          bar.style.width = bar.style.getPropertyValue("--w");
-        });
-      });
-    }
-
-    const useful = events
-      .filter((event) => ["PushEvent", "CreateEvent", "PullRequestEvent"].includes(event.type))
-      .slice(0, 5);
-
-    if (!useful.length) {
-      eventsRoot.innerHTML = '<li class="gh-fallback">Herkese açık son olay bulunamadı.</li>';
-      return;
-    }
-
-    eventsRoot.innerHTML = useful
-      .map((event) => {
-        const repo = event.repo?.name?.replace(`${GITHUB_USER}/`, "") || "repo";
-        const when = relativeTime(new Date(event.created_at));
-        const message =
-          event.type === "PushEvent"
-            ? event.payload?.commits?.at(-1)?.message || "push"
-            : event.type === "PullRequestEvent"
-              ? event.payload?.pull_request?.title || "pull request"
-              : `create ${event.payload?.ref_type || "repo"}`;
-        return `<li><strong>${repo}</strong>${message}<small>${when}</small></li>`;
-      })
-      .join("");
-  } catch {
-    langsRoot.innerHTML = '<p class="gh-fallback">GitHub şu an yanıt vermiyor. Profil: memin25</p>';
-    eventsRoot.innerHTML = '<li class="gh-fallback">Canlı olaylar yüklenemedi.</li>';
-  }
-}
-
 function setupPalette() {
   const palette = document.getElementById("palette");
   const input = document.getElementById("palette-input");
@@ -415,10 +329,18 @@ function setupCursorTrail() {
 
   const ctx = canvas.getContext("2d");
   const points = [];
+  let cssWidth = window.innerWidth;
+  let cssHeight = window.innerHeight;
+
   const resize = () => {
-    canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * window.devicePixelRatio;
-    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    const dpr = window.devicePixelRatio || 1;
+    cssWidth = window.innerWidth;
+    cssHeight = window.innerHeight;
+    canvas.style.width = `${cssWidth}px`;
+    canvas.style.height = `${cssHeight}px`;
+    canvas.width = Math.round(cssWidth * dpr);
+    canvas.height = Math.round(cssHeight * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
   resize();
   window.addEventListener("resize", resize);
@@ -426,14 +348,19 @@ function setupCursorTrail() {
   window.addEventListener(
     "pointermove",
     (event) => {
-      points.push({ x: event.clientX, y: event.clientY, life: 1 });
+      const rect = canvas.getBoundingClientRect();
+      points.push({
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+        life: 1,
+      });
       if (points.length > 18) points.shift();
     },
     { passive: true }
   );
 
   const draw = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, cssWidth, cssHeight);
     points.forEach((point, index) => {
       point.life -= 0.045;
       if (point.life <= 0) return;
@@ -512,6 +439,178 @@ function setupChrome() {
   });
 }
 
+function setupTickerHoverPause() {
+  const ticker = document.querySelector(".ticker");
+  const track = document.querySelector(".ticker-track");
+  if (!ticker || !track || prefersReduced()) return;
+
+  const getAnim = () => track.getAnimations()[0];
+
+  ticker.addEventListener("mouseenter", () => {
+    const anim = getAnim();
+    if (!anim) return;
+    anim.playbackRate = 1;
+    anim.pause();
+  });
+
+  ticker.addEventListener("mouseleave", () => {
+    const anim = getAnim();
+    if (!anim) return;
+    anim.playbackRate = 1;
+    anim.play();
+  });
+}
+
+function setupDreamSection() {
+  const phraseEl = document.getElementById("dream-phrase");
+  const stepsRoot = document.getElementById("dream-steps");
+  if (!phraseEl) return;
+
+  const phrases = [
+    "mobil uygulama",
+    "kurumsal web sitesi",
+    "stok takip sistemi",
+    "e-ticaret platformu",
+    "admin paneli",
+    "raporlama ekranı",
+  ];
+  const steps = stepsRoot ? [...stepsRoot.querySelectorAll("li")] : [];
+  let phraseIndex = 0;
+  let stepIndex = 0;
+  let phraseTimer;
+  let stepTimer;
+
+  const setPhrase = (next, animate = true) => {
+    phraseIndex = (next + phrases.length) % phrases.length;
+    if (!animate) {
+      phraseEl.textContent = phrases[phraseIndex];
+      return;
+    }
+    phraseEl.classList.add("is-changing");
+    window.setTimeout(() => {
+      phraseEl.textContent = phrases[phraseIndex];
+      phraseEl.classList.remove("is-changing");
+    }, 320);
+  };
+
+  const setStep = (next) => {
+    if (!steps.length) return;
+    stepIndex = (next + steps.length) % steps.length;
+    steps.forEach((step, i) => step.classList.toggle("is-active", i === stepIndex));
+  };
+
+  if (prefersReduced()) {
+    phraseEl.textContent = phrases[0];
+    setStep(0);
+    return;
+  }
+
+  const startLoops = () => {
+    window.clearInterval(phraseTimer);
+    window.clearInterval(stepTimer);
+    phraseTimer = window.setInterval(() => setPhrase(phraseIndex + 1), 2800);
+    stepTimer = window.setInterval(() => setStep(stepIndex + 1), 3200);
+  };
+
+  setPhrase(0, false);
+  setStep(0);
+  startLoops();
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      window.clearInterval(phraseTimer);
+      window.clearInterval(stepTimer);
+      return;
+    }
+    startLoops();
+  });
+}
+
+function setupHeroGallery() {
+  const root = document.getElementById("hero-gallery");
+  if (!root) return;
+
+  const slides = [...root.querySelectorAll(".hero-banner-slide")];
+  const dots = [...root.querySelectorAll(".hero-banner-dots button")];
+  const viewport = root.querySelector(".hero-banner-viewport");
+  const title = document.getElementById("hero-gallery-title");
+  const flag = document.getElementById("hero-gallery-flag");
+  if (!slides.length) return;
+
+  let index = 0;
+  let timer;
+
+  const syncViewportRatio = (slide) => {
+    if (!viewport || !slide) return;
+    const width = Number(slide.dataset.width);
+    const height = Number(slide.dataset.height);
+    if (width > 0 && height > 0) {
+      viewport.style.aspectRatio = `${width} / ${height}`;
+      return;
+    }
+    const img = slide.querySelector("img");
+    if (img?.naturalWidth && img.naturalHeight) {
+      viewport.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+    }
+  };
+
+  const apply = (next) => {
+    index = (next + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("is-on", i === index);
+      dot.setAttribute("aria-selected", i === index ? "true" : "false");
+    });
+    const active = slides[index];
+    syncViewportRatio(active);
+    if (title) title.textContent = active.dataset.title || "";
+    if (flag) flag.textContent = active.dataset.flag || "";
+  };
+
+  const start = () => {
+    window.clearInterval(timer);
+    if (prefersReduced()) return;
+    timer = window.setInterval(() => apply(index + 1), 5200);
+  };
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      apply(i);
+      start();
+    });
+  });
+
+  slides.forEach((slide) => {
+    const img = slide.querySelector("img");
+    if (!img) return;
+    if (img.complete) return;
+    img.addEventListener("load", () => {
+      if (slide.classList.contains("is-active")) syncViewportRatio(slide);
+    }, { once: true });
+  });
+
+  apply(0);
+  start();
+}
+
+function setupServiceFilters() {
+  const root = document.querySelector(".service-filters");
+  const cards = document.querySelectorAll(".service");
+  if (!root || !cards.length) return;
+
+  root.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-filter]");
+    if (!button) return;
+    const filter = button.dataset.filter;
+    root.querySelectorAll("button").forEach((item) => item.classList.toggle("is-on", item === button));
+    cards.forEach((card) => {
+      const cats = (card.dataset.cat || "").split(/\s+/);
+      const show = filter === "all" || cats.includes(filter);
+      card.classList.toggle("is-hidden", !show);
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   runBoot();
   setupChrome();
@@ -523,5 +622,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCopy();
   setupPalette();
   setupCursorTrail();
-  loadGitHub();
+  setupServiceFilters();
+  setupHeroGallery();
+  setupDreamSection();
+  setupTickerHoverPause();
 });
