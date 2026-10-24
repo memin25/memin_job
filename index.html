@@ -110,16 +110,6 @@
   <link rel="stylesheet" href="style.css?v=38">
 </head>
 <body>
-  <!-- Netlify deploy sırasında formu kaydetmek için (görünmez) -->
-  <form name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="hidden" name="form-name" value="iletisim">
-    <input name="bot-field">
-    <input name="name">
-    <input name="email">
-    <input name="subject">
-    <textarea name="message"></textarea>
-  </form>
-
   <div class="atmosphere" aria-hidden="true"></div>
   <canvas id="cursor-trail" aria-hidden="true"></canvas>
 
@@ -722,7 +712,7 @@ export default engineer;</code></pre>
           </ul>
         </div>
 
-        <form class="contact-form" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/tesekkur.html" data-reveal>
+        <form class="contact-form" id="contact-form" name="iletisim" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" action="/tesekkur.html" data-reveal>
           <input type="hidden" name="form-name" value="iletisim">
           <p class="honeypot">
             <label>Boş bırakın <input name="bot-field"></label>
@@ -817,6 +807,6 @@ export default engineer;</code></pre>
     </div>
   </div>
 
-  <script src="script.js?v=27"></script>
+  <script src="script.js?v=28"></script>
 </body>
 </html>
