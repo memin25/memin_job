@@ -726,32 +726,11 @@ function setupContactForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
 
-  const thanksPath = form.getAttribute("action") || "/tesekkur.html";
   const submitBtn = form.querySelector('[type="submit"]');
-  const failNote = form.querySelector(".form-note");
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (submitBtn) submitBtn.disabled = true;
-
-    try {
-      const body = new URLSearchParams(new FormData(form)).toString();
-      const res = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body,
-      });
-
-      if (!res.ok) throw new Error("Form gönderilemedi");
-
-      window.location.href = thanksPath;
-    } catch {
-      if (submitBtn) submitBtn.disabled = false;
-      if (failNote) {
-        failNote.hidden = false;
-        failNote.textContent =
-          "Gönderilemedi. Lütfen muhammedea25@gmail.com veya WhatsApp üzerinden yazın.";
-      }
+  form.addEventListener("submit", () => {
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Gönderiliyor…";
     }
   });
 }
