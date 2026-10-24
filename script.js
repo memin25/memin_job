@@ -203,14 +203,14 @@ function setupCopy() {
   button.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(code.textContent);
-      button.textContent = "kopyalandı";
+      button.textContent = "Kopyalandı";
       button.classList.add("is-copied");
       window.setTimeout(() => {
-        button.textContent = "kopyala";
+        button.textContent = "Kopyala";
         button.classList.remove("is-copied");
       }, 1400);
     } catch {
-      button.textContent = "seçip kopyala";
+      button.textContent = "Seçip kopyala";
     }
   });
 }
@@ -422,7 +422,7 @@ function setupChrome() {
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Menüyü kapat" : "Menüyü aç");
     const label = toggle.querySelector("em");
-    if (label) label.textContent = open ? "kapat" : "menü";
+    if (label) label.textContent = open ? "Kapat" : "Menü";
     if (open) {
       header?.classList.remove("is-hidden");
       toggle.classList.remove("is-hidden");
@@ -434,7 +434,7 @@ function setupChrome() {
       nav.classList.remove("is-open");
       toggle?.setAttribute("aria-expanded", "false");
       const label = toggle?.querySelector("em");
-      if (label) label.textContent = "menü";
+      if (label) label.textContent = "Menü";
     });
   });
 }
@@ -595,20 +595,131 @@ function setupHeroGallery() {
 
 function setupServiceFilters() {
   const root = document.querySelector(".service-filters");
-  const cards = document.querySelectorAll(".service");
+  const grid = document.querySelector(".service-grid");
+  const modal = document.getElementById("service-modal");
+  const modalPanel = document.getElementById("service-modal-panel");
+  const moreBtn = document.getElementById("service-more-btn");
+  const moreWrap = moreBtn?.closest(".service-more-wrap");
+  const cards = grid ? [...grid.querySelectorAll(".service")] : [];
   if (!root || !cards.length) return;
+
+  cards.forEach((card) => {
+    if (!card.querySelector(".service-body")) {
+      const body = document.createElement("div");
+      body.className = "service-body";
+      const lede = card.querySelector(":scope > p:not(.service-no):not(.service-for):not(.tag)");
+      const includes = card.querySelector(".service-includes");
+      const link = card.querySelector(":scope > .service-contact-btn");
+      if (lede) {
+        lede.classList.add("service-lede");
+        body.append(lede);
+      }
+      if (includes) body.append(includes);
+      if (link) body.append(link);
+      card.append(body);
+    }
+    if (!card.querySelector(".service-open-btn")) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "service-open-btn";
+      btn.textContent = "Devamını gör";
+      card.append(btn);
+    }
+  });
+
+  const PAGE = 3;
+  let filter = "all";
+  let shown = PAGE;
+
+  const matchesFilter = (card) => {
+    const cats = (card.dataset.cat || "").split(/\s+/);
+    return filter === "all" || cats.includes(filter);
+  };
+
+  const apply = () => {
+    const matched = cards.filter(matchesFilter);
+    if (shown > matched.length) shown = matched.length;
+    matched.forEach((card, index) => {
+      card.classList.toggle("is-hidden", index >= shown);
+    });
+    cards.filter((card) => !matchesFilter(card)).forEach((card) => {
+      card.classList.add("is-hidden");
+    });
+    const allVisible = shown >= matched.length;
+    if (moreBtn) moreBtn.hidden = allVisible;
+    if (moreWrap) moreWrap.hidden = allVisible;
+  };
+
+  const MODAL_MS = prefersReduced() ? 220 : 540;
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("service-modal-open");
+    window.setTimeout(() => {
+      if (!modal.classList.contains("is-open")) modal.hidden = true;
+    }, MODAL_MS);
+  };
+
+  const openModal = (card) => {
+    if (!modal || !modalPanel) return;
+    modal.classList.remove("is-open");
+    modalPanel.innerHTML = "";
+    ["service-no", "tag"].forEach((sel) => {
+      const el = card.querySelector(`.${sel}`);
+      if (el) modalPanel.append(el.cloneNode(true));
+    });
+    const title = card.querySelector("h3");
+    if (title) {
+      const clone = title.cloneNode(true);
+      clone.id = "service-modal-title";
+      modalPanel.append(clone);
+    }
+    const forEl = card.querySelector(".service-for");
+    if (forEl) modalPanel.append(forEl.cloneNode(true));
+    const body = card.querySelector(".service-body");
+    if (body) modalPanel.append(body.cloneNode(true));
+
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("service-modal-open");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => modal.classList.add("is-open"));
+    });
+  };
+
+  grid?.addEventListener("click", (event) => {
+    const openBtn = event.target.closest(".service-open-btn");
+    if (!openBtn) return;
+    const card = openBtn.closest(".service");
+    if (card) openModal(card);
+  });
+
+  modal?.querySelectorAll("[data-service-modal-close]").forEach((el) => {
+    el.addEventListener("click", closeModal);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal && !modal.hidden) closeModal();
+  });
 
   root.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-filter]");
     if (!button) return;
-    const filter = button.dataset.filter;
+    filter = button.dataset.filter || "all";
+    shown = PAGE;
     root.querySelectorAll("button").forEach((item) => item.classList.toggle("is-on", item === button));
-    cards.forEach((card) => {
-      const cats = (card.dataset.cat || "").split(/\s+/);
-      const show = filter === "all" || cats.includes(filter);
-      card.classList.toggle("is-hidden", !show);
-    });
+    apply();
   });
+
+  moreBtn?.addEventListener("click", () => {
+    const matched = cards.filter(matchesFilter);
+    shown = Math.min(shown + PAGE, matched.length);
+    apply();
+  });
+
+  apply();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

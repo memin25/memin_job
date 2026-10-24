@@ -1,9 +1,33 @@
 [build]
   publish = "."
 
+# Tek canonical adres: https://muhammedeminarslan.com
+[[redirects]]
+  from = "http://muhammedeminarslan.com/*"
+  to = "https://muhammedeminarslan.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.muhammedeminarslan.com/*"
+  to = "https://muhammedeminarslan.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://muhammedeminarslanfinalprojesi.netlify.app/*"
+  to = "https://muhammedeminarslan.com/:splat"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
